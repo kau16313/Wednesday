@@ -15,10 +15,16 @@ package card;
  */
 public class Card {
 
-   private String suit; //clubs, spades, diamonds, hearts
-   private int value;//1-13
+    public Card(int value, String suit) {
+        this.value = value;
+        this.suit = suit;
+    }
 
-   public static final String [] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs"};
+    private String suit; // clubs, spades, diamonds, hearts
+    private int value; // 1-13
+
+    public static final String[] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs"};
+
     /**
      * @return the suit
      */
@@ -46,7 +52,27 @@ public class Card {
     public void setValue(int value) {
         this.value = value;
     }
-   
-   
-    
+
+    @Override
+    public String toString() {
+        return value + " of " + suit;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Card card = (Card) obj;
+
+        if (value != card.value) return false;
+        return suit != null ? suit.equals(card.suit) : card.suit == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value;
+        result = 31 * result + (suit != null ? suit.hashCode() : 0);
+        return result;
+    }
 }
